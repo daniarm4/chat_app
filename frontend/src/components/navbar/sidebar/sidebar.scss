@@ -1,0 +1,28 @@
+.sidebar {
+    background-color: #fff;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  
+    .links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+  
+    .sidebar-icon {
+        width: 20px;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+  
+        &:hover {
+            background-color: rgb(240, 243, 245);
+        }
+    }
+  
+  }

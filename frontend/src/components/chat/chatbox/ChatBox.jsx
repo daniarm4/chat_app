@@ -1,10 +1,11 @@
 import React from 'react';
 import Messages from '../messages/Messages';
-import Input from './Input';
+import Input from '../input/Input';
 import useWebSocket from 'react-use-websocket';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetMessagesQuery } from '../../store/api/chatApi';
-import { api } from '../../store/api/base';
+import { useGetMessagesQuery } from '../../../store/api/chatApi';
+import { api } from '../../../store/api/base';
+import './chatbox.scss';
 
 const ChatBox = () => {
     const state = useSelector(state => state);
@@ -43,10 +44,7 @@ const ChatBox = () => {
     }
 
     return (
-        <div className='chat-box'>
-            <div className='chat-info'>
-                <span>{chatName}</span>
-            </div>
+        <div className='content'>
             <Messages messages={messages.messages} />
             <Input addMessage={(message) => addNewMessage(message)} />
         </div>

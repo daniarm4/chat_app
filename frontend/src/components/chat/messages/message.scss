@@ -1,0 +1,51 @@
+.message {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5px;
+
+  .message-content {
+    display: flex;
+    flex-direction: column;
+
+    .message-info {
+      display: flex;
+      align-items: center;  
+  
+      .message-sender {
+        font-weight: 600;
+        color: rgb(65, 68, 68);
+        font-size: 14px;
+        margin-right: 5px;
+      }
+    
+      .message-created {
+          font-size: 11px;
+          display: flex;
+          color:rgb(159, 167, 173);
+      }
+    }
+
+    .message-text {
+      font-size: 14px;
+      padding: 5px 15px;
+      font-weight: 600;
+      background-color: rgb(230, 234, 238);
+      color: black;
+      margin-top: 5px;
+      overflow: hidden;
+      width: fit-content;
+      border-radius: 30px;
+    }
+  
+    .message-text-owner {
+      background-color: rgb(72, 161, 235);
+      color: #fff;
+      place-self: end;
+    }
+  }
+}
+
+.owner {
+    place-self: end;
+    flex-direction: row-reverse;
+}

@@ -1,3 +1,4 @@
+import './input.scss';
 import React, { useState } from 'react';
 
 
@@ -16,7 +17,7 @@ const Input = ({addMessage}) => {
     }
 
     return (
-        <div className='message-input'>
+        <div className="chat-input">
             <input 
                 type='text' 
                 placeholder='Type message' 
@@ -24,7 +25,7 @@ const Input = ({addMessage}) => {
                 onKeyDown={onKeyDown}
                 onChange={e => setMessage(e.target.value)}>
             </input>
-            <button className='send-button' onClick={handleClick}>Send message</button>
+            <button onClick={handleClick}><img src='send-message.png'/></button>
         </div>
     )
 }

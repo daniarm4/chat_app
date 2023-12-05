@@ -1,48 +1,52 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useRegisterMutation } from '../../../store/api/userApi';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../store/api/userApi';
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const navigate = useNavigate();
-    const [userLogin, {data, isLoading, isError, isSuccess}] = useLoginMutation();
+    const [registerUser, {isLoading, isError, isSuccess, data}] = useRegisterMutation();
 
     const validationSchema = yup.object({
         username: yup.string()
-            .min(3, 'Min 3 characters')
-            .max(50, 'Must be 50 characters or less')
+            .min(3, 'Min character length 3')
+            .max(50, 'Max character length 50')
             .required('Username is required'),
         password: yup.string()
-            .min(8, 'Min 8 characters')
-            .max(16, 'Must be 16 characters or less')
+            .min(8, 'Min password length 8')
+            .max(16, 'Max password length 16')
+            .required('Password is required'),
+        rePassword: yup.string()
+            .oneOf([yup.ref('password')], 'Password must match')
             .required('Password is required')
     })
 
     const formik = useFormik({
         initialValues: {
-            username: '',
-            password: ''
+            'username': '',
+            'password': '',
+            'rePassword': ''
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log('submit');
-            userLogin({
-                username: values.username, password: values.password
-            })
+            const registerData = {
+                username: values.username,
+                password: values.password, 
+                re_password: values.rePassword
+            };
+            registerUser(registerData);
         }
     });
+
+    if (isSuccess) {
+        navigate('/login');
+    }
 
     if (isLoading) {
         console.log('loading');
     }
 
-    if (isSuccess) {
-        localStorage.setItem('accessToken', data.access_token);
-        localStorage.setItem('refreshToken', data.refresh_token);
-        navigate('/chats');
-    }
-    
     if (isError) {
         console.log('error');
         console.log(data);
@@ -51,10 +55,10 @@ const LoginForm = () => {
     const fields = [
         {id: 'username', type: 'text', placeholder: 'Username'},
         {id: 'password', type: 'password', placeholder: 'Password'},
+        {id: 'rePassword', type: 'password', placeholder: 'Repeat password'}
     ]
 
     return (
-        
         <form onSubmit={formik.handleSubmit}>
             {fields.map(field => {
                 return (
@@ -72,9 +76,9 @@ const LoginForm = () => {
                     </>
                 )
             })}
-            <button type='submit'>Login</button>
+            <button type='submit'>Sign up</button>
         </form>
     )
 }
 
-export default LoginForm;
+export default RegisterForm;

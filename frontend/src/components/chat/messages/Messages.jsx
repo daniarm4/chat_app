@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import Message from "./Message";
-import './messages.css'
+import './messages.scss'
 
 const Messages = ({messages}) => {
     const messageBox = useRef(null);
